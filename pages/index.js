@@ -2,16 +2,14 @@ import Head from "next/head";
 import { useState } from "react";
 
 export default function Home() {
-  const [question, setQuestion] = useState("Your Question Will Go Here!");
-  const [reply, setReply] = useState("Ask Me Anything!");
+  const [formInfo, setInfo] = useState("");
 
-  function questionAskedHandler(event) {
+  function infoHandler(event) {
     event.preventDefault();
-    // alert(event.target.question.value)
-    const randomReply = Math.random() > 0.5 ? "Yes" : "No";
+    const formData = new FormData(event.target);
+    const formJSON = JSON.stringify(Object.fromEntries(formData));
 
-    setReply(randomReply);
-    setQuestion(event.target.question.value);
+    setInfo(formJSON);
   }
 
   return (
@@ -24,7 +22,24 @@ export default function Home() {
       <Header title="Cookie Stand Admin" />
 
       <main className="p-9">
-        <ShowForm />
+        <div className="w-3/4 p-3 bg-green-300 rounded-md mx-auto">
+          <div className="text-center">
+            <h3 className="w-full text-center text-2xl p-2">
+              Create Cookie Stand
+            </h3>
+          </div>
+
+          <ShowForm />
+        </div>
+
+        <div className="m-4">
+          <h3 className="text-sm text-center text-gray-500">
+            Report Table coming soon...
+          </h3>
+          <p className="text-sm text-center text-gray-500 results">
+            {formJSON}
+          </p>
+        </div>
       </main>
 
       <footer className="p-4 mt-8 bg-green-500 ">
@@ -43,27 +58,31 @@ export default function Home() {
 
   function ShowForm(props) {
     return (
-      <div className="w-full mx-auto bg-green-300 my-8 rounded-md pt-3">
-        <h2 className="grid justify-items-center text-2xl">
-          Create Cookie Stand
-        </h2>
-        <form onSubmit={questionAskedHandler} className="p-4 mt-0">
-          <div className="inline-block">
-            <label className="px-2">Location </label>
-            <input name="location" className="flex-auto p-3" />
-            <label className="px-2"> Minimum Customers per Hour </label>
-            <input name="min" className="flex-auto p-3" />
-            <label className="px-2"> Maximum Customers per Hour </label>
-            <input name="max" className="flex-auto p-3" />
-            <label className="px-2"> Average Cookies per Sale </label>
-            <input name="max" className="flex-auto pl-3" />
+      <form onSubmit={infoHandler} className="">
+        <div className="flex-1">
+          <label className="text-sm w-1/6">Location </label>
+          <input name="location" className="w-5/6 mb-4" />
+        </div>
+        <div className="grid grid-flow-col grid-cols-4 gap-4">
+          <div className="flex-1">
+            <label className="text-sm"> Minimum Customers per Hour </label>
+            <input name="min" className="w-full p-0.5" />
           </div>
-
-          <button className="px-12 py-4 m-4 bg-green-600 text-black-50">
-            Create
-          </button>
-        </form>
-      </div>
+          <div className="flex-1">
+            <label className="text-sm"> Maximum Customers per Hour </label>
+            <input name="max" className="w-full p-0.5" />
+          </div>
+          <div className="flex-1">
+            <label className="text-sm"> Average Cookies per Sale </label>
+            <input name="max" className="w-full p-0.5" />
+          </div>
+          <div className="flex-1">
+            <button className="text-sm px-16 py-4 m-4 bg-green-600 text-black-50">
+              Create
+            </button>
+          </div>
+        </div>
+      </form>
     );
   }
 }
