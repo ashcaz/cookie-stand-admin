@@ -85,4 +85,25 @@ export default function Home() {
       </form>
     );
   }
+
+  function ResponseTable(props) {
+    return (
+      <table className="w-1/2 mx-auto my-4">
+        <thead>
+          <tr>
+            <th className="border-green-700">No.</th>
+            <th className="border-green-700">Question</th>
+            <th className="border-green-700">Reponse</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td className="">1</td>
+            <td className="">2</td>
+            <td className="">3</td>
+          </tr>
+        </tbody>
+      </table>
+    );
+  }
 }
