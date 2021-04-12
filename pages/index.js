@@ -36,8 +36,8 @@ export default function Home() {
           <h3 className="text-sm text-center text-gray-500">
             Report Table coming soon...
           </h3>
-          <p className="text-sm text-center text-gray-500 results">
-            {formJSON}
+          <p className="text-sm p-4 text-center text-gray-500 results">
+            {formInfo}
           </p>
         </div>
       </main>
