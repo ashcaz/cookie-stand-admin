@@ -41,11 +41,8 @@ export default function Home() {
           </p> */}
           <ResponseTable />
         </div>
+        <Footer />
       </main>
-
-      <footer className="p-4 mt-8 bg-green-500 ">
-        <p className="text-left text-black">&copy;2021</p>
-      </footer>
     </div>
   );
 
@@ -105,6 +102,14 @@ export default function Home() {
           </tr>
         </tbody>
       </table>
+    );
+  }
+
+  function Footer() {
+    return (
+      <footer className="flex p-4 mt-8 bg-green-500 ">
+        <p className="text-left text-black">&copy;2021</p>
+      </footer>
     );
   }
 }
