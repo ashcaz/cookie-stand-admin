@@ -32,13 +32,14 @@ export default function Home() {
           <ShowForm />
         </div>
 
-        <div className="m-4">
-          <h3 className="text-sm text-center text-gray-500">
+        <div className="mt-8">
+          {/* <h3 className="text-sm text-center text-gray-500">
             Report Table coming soon...
           </h3>
-          <p className="text-sm p-4 text-center text-gray-500 results">
+          <p className="text-sm pt-10 text-center text-gray-500 results">
             {formInfo}
-          </p>
+          </p> */}
+          <ResponseTable />
         </div>
       </main>
 
@@ -64,17 +65,17 @@ export default function Home() {
           <input name="location" className="w-5/6 mb-4" />
         </div>
         <div className="grid grid-flow-col grid-cols-4 gap-4">
-          <div className="flex-1">
+          <div className="flex-1 bg-green-200 rounded-md p-3">
             <label className="text-sm"> Minimum Customers per Hour </label>
-            <input name="min" className="w-full p-0.5" />
+            <input name="minCustomers" className="w-full p-0.5" />
           </div>
-          <div className="flex-1">
+          <div className="flex-1 bg-green-200 rounded-md p-3">
             <label className="text-sm"> Maximum Customers per Hour </label>
-            <input name="max" className="w-full p-0.5" />
+            <input name="maxCustomers" className="w-full p-0.5" />
           </div>
-          <div className="flex-1">
+          <div className="flex-1 bg-green-200 rounded-md p-3">
             <label className="text-sm"> Average Cookies per Sale </label>
-            <input name="max" className="w-full p-0.5" />
+            <input name="avgCookies" className="w-full p-0.5" />
           </div>
           <div className="flex-1">
             <button className="text-sm px-16 py-4 m-4 bg-green-600 text-black-50">
@@ -83,6 +84,27 @@ export default function Home() {
           </div>
         </div>
       </form>
+    );
+  }
+
+  function ResponseTable(props) {
+    return (
+      <table className="w-1/2 mx-auto my-4">
+        <thead>
+          <tr>
+            <th className="border-green-700">No.</th>
+            <th className="border-green-700">Question</th>
+            <th className="border-green-700">Reponse</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td className="">1</td>
+            <td className="">2</td>
+            <td className="">3</td>
+          </tr>
+        </tbody>
+      </table>
     );
   }
 }
