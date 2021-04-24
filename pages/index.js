@@ -1,82 +1,88 @@
-import Head from 'next/head'
+import Head from "next/head";
+import { useState } from "react";
 
 export default function Home() {
+  const [formInfo, setInfo] = useState("");
+
+  function infoHandler(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const formJSON = JSON.stringify(Object.fromEntries(formData));
+
+    setInfo(formJSON);
+  }
+
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
+    <div className="bg-green-50">
       <Head>
-        <title>Create Next App</title>
+        <title>Cookie Stand Admin</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="flex flex-col items-center justify-center flex-1 px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to{' '}
-          <a className="text-blue-600" href="https://nextjs.org">
-            Next.js!
-          </a>
-        </h1>
+      <Header title="Cookie Stand Admin" />
 
-        <p className="mt-3 text-2xl">
-          Get started by editing{' '}
-          <code className="p-3 font-mono text-lg bg-gray-100 rounded-md">
-            pages/index.js
-          </code>
-        </p>
+      <main className="p-9">
+        <div className="w-3/4 p-3 bg-green-300 rounded-md mx-auto">
+          <div className="text-center">
+            <h3 className="w-full text-center text-2xl p-2">
+              Create Cookie Stand
+            </h3>
+          </div>
 
-        <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 sm:w-full">
-          <a
-            href="https://nextjs.org/docs"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Find in-depth information about Next.js features and API.
-            </p>
-          </a>
+          <ShowForm />
+        </div>
 
-          <a
-            href="https://nextjs.org/learn"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Learn about Next.js in an interactive course with quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+        <div className="m-4">
+          <h3 className="text-sm text-center text-gray-500">
+            Report Table coming soon...
+          </h3>
+          <p className="text-sm p-4 text-center text-gray-500 results">
+            {formInfo}
+          </p>
         </div>
       </main>
 
-      <footer className="flex items-center justify-center w-full h-24 border-t">
-        <a
-          className="flex items-center justify-center"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="h-4 ml-2" />
-        </a>
+      <footer className="p-4 mt-8 bg-green-500 ">
+        <p className="text-left text-black">&copy;2021</p>
       </footer>
     </div>
-  )
+  );
+
+  function Header(props) {
+    return (
+      <header className="flex p-4 bg-green-500 text-black-50">
+        <h1 className="text-4xl border-color-black">{props.title}</h1>
+      </header>
+    );
+  }
+
+  function ShowForm(props) {
+    return (
+      <form onSubmit={infoHandler} className="">
+        <div className="flex-1">
+          <label className="text-sm w-1/6">Location </label>
+          <input name="location" className="w-5/6 mb-4" />
+        </div>
+        <div className="grid grid-flow-col grid-cols-4 gap-4">
+          <div className="flex-1">
+            <label className="text-sm"> Minimum Customers per Hour </label>
+            <input name="min" className="w-full p-0.5" />
+          </div>
+          <div className="flex-1">
+            <label className="text-sm"> Maximum Customers per Hour </label>
+            <input name="max" className="w-full p-0.5" />
+          </div>
+          <div className="flex-1">
+            <label className="text-sm"> Average Cookies per Sale </label>
+            <input name="max" className="w-full p-0.5" />
+          </div>
+          <div className="flex-1">
+            <button className="text-sm px-16 py-4 m-4 bg-green-600 text-black-50">
+              Create
+            </button>
+          </div>
+        </div>
+      </form>
+    );
+  }
 }
